@@ -127,7 +127,10 @@ int main (int argc, char** argv) {
   int sum = std::accumulate(sStore.begin(), sStore.end(), 0);
   int mean = sum / sStore.size();
 
-  printf ("Min : %d Max : %d Mean : %d ", sStore[0] , sStore[sEnd_arg - sStart_arg - 1], mean );
+  int p99 = sStore.size() - (sStore.size() / 100) + 1; 
+  int p999 = sStore.size() - (sStore.size() / 1000) + 1; 
+  
+  printf ("Min latency: [%d] Max latency: [%d] Avg Latency : [%d] 99 percent latency : [%d] 99.9 percent latency : [%d]  ", sStore[0] , sStore[sEnd_arg - sStart_arg - 1], mean, sStore[p99] , sStore[p999]  );
   double tps = (double)(sEnd_arg - sStart_arg)  / ( (double)sum / 1000000 ) ;
   printf ("TPS : %lf\n", tps ) ;
 
