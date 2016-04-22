@@ -1,0 +1,131 @@
+#include <bmt.hpp>
+#include <cstdio>
+#include <cstring>
+
+
+EXEC SQL INCLUDE SQLCA;
+EXEC SQL INCLUDE common.hpp;
+
+// Constructor 
+GPECRunner :: GPECRunner ( const string& aUser, 
+                           const string& aPwd, 
+                           const string& aDSN )  { 
+   // Connect to SUNDB 
+   EXEC SQL BEGIN DECLARE SECTION ; 
+   char sUserName [80]; 
+   char sPassword [20];
+   char sDSN [1024] ; 
+   EXEC SQL END DECLARE SECTION ;
+
+   // Copy argument to host variables
+
+   std::strcpy ( sUserName, aUser.c_str());  
+   std::strcpy ( sPassword, aPwd.c_str());  
+   std::strcpy ( sDSN, aDSN.c_str());  
+
+
+   // Connect to DB
+
+   EXEC SQL CONNECT :sUserName IDENTIFIED BY :sPassword USING :sDSN ; 
+   if ( sqlca.sqlcode ) { 
+     printf("Failed to connect SUNDB [ %s / %s using (%s) ]\n" , 
+             sUserName, sPassword, sDSN ) ;
+   } 
+} 
+
+// Destructor 
+GPECRunner :: ~GPECRunner ( ) { 
+   EXEC SQL DISCONNECT; 
+} 
+
+
+
+int GPECRunner :: doInsert ( int aStart , 
+                             int aLast ) { 
+  EXEC SQL BEGIN DECLARE SECTION ;
+  Record sRecord ; 
+  EXEC SQL END DECLARE SECTION ;
+
+  while ( aStart < aLast ) { 
+    // Build Structure  
+    sRecord.c1 = aStart; 
+    std::sprintf(sRecord.c2 , "%010d", aStart ) ;
+    std::sprintf(sRecord.c3 , "%010d", aStart ) ;
+    std::sprintf(sRecord.c4 , "%010d", aStart ) ;
+    std::sprintf(sRecord.c5 , "%010d", aStart ) ;
+    std::sprintf(sRecord.c6 , "%010d", aStart ) ;
+    std::sprintf(sRecord.c7 , "%010d", aStart ) ;
+    std::sprintf(sRecord.c8 , "%010d", aStart ) ;
+    sRecord.c9= aStart; 
+    
+    // Insert 
+
+    EXEC SQL INSERT INTO TEST_01 VALUES ( :sRecord, SYSDATE ) ;
+    if ( sqlca.sqlcode )  { 
+     printf("Failed to Insert SUNDB : %d [%s]\n", sRecord.c1, sqlca.sqlerrm.sqlerrmc ) ;
+     return -1;
+    } 
+    EXEC SQL COMMIT ;
+    aStart ++;
+  } 
+  return 0; 
+} 
+
+int GPECRunner :: doSelect ( int aStart, int aLast )  { 
+  EXEC SQL BEGIN DECLARE SECTION ;
+  Record sRecord ; 
+  EXEC SQL END DECLARE SECTION ;
+  
+  while ( aStart < aLast ) { 
+    // Build Structure  
+    sRecord.c1 = aStart; 
+    // Insert 
+    EXEC SQL SELECT C1, C2, C3, c4 ,c5, c6, c7, c8, c9 into :sRecord FROM TEST_01 WHERE c1 = :sRecord.c1 ;
+    if ( sqlca.sqlcode )  { 
+     printf("Failed to Select SUNDB : %d [%s]\n", sRecord.c1, sqlca.sqlerrm.sqlerrmc ) ;
+     return -1;
+    } 
+    aStart ++;
+  } 
+  return 0;   
+}
+
+int GPECRunner :: doDelete ( int aStart, int aLast )  { 
+  EXEC SQL BEGIN DECLARE SECTION ;
+  Record sRecord ; 
+  EXEC SQL END DECLARE SECTION ;
+  
+  while ( aStart < aLast ) { 
+    // Build Structure  
+    sRecord.c1 = aStart; 
+    // Insert 
+    EXEC SQL DELETE FROM TEST_01 WHERE C1 = :sRecord.c1 ; 
+    if ( sqlca.sqlcode )  { 
+     printf("Failed to Delete SUNDB : %d [%s]\n", sRecord.c1, sqlca.sqlerrm.sqlerrmc ) ;
+     return -1;
+    } 
+    EXEC SQL COMMIT ;
+    aStart ++;
+  } 
+  return 0;    
+}
+
+int GPECRunner :: doUpdate ( int aStart, int aLast )  { 
+  EXEC SQL BEGIN DECLARE SECTION ;
+  Record sRecord ; 
+  EXEC SQL END DECLARE SECTION ;
+  
+  while ( aStart < aLast ) { 
+    // Build Structure  
+    sRecord.c1 = aStart; 
+    // Insert 
+    EXEC SQL UPDATE TEST_01 SET C9 = c9 + 1 WHERE C1 = :sRecord.c1 ; 
+    if ( sqlca.sqlcode )  { 
+     printf("Failed to Update SUNDB : %d [%s]\n", sRecord.c1, sqlca.sqlerrm.sqlerrmc ) ;
+     return -1;
+    } 
+    aStart ++;
+    EXEC SQL COMMIT ;
+  } 
+   return 0;
+}
