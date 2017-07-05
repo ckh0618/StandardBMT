@@ -15,19 +15,13 @@ This program is for
 * If you want to test DBM, just run init_dbm.sh file. all data will be erased.  
 
 # How to change dbms/dbm connection information 
-* Just open Runner.cc and modify  constructor parameters . 
+* Just open Runner.cc and modify  constructor parameters and make. 
 
-| Position | Description | 
------------ ------------
-| 1 | User Name (DBMS) / Instance name (DBM ) |
-| 2 | Password (DBMS) / Not used ( DBM ) | 
-| 3 | DSN ( DBMS ) / TableNAme ( DBM ) | 
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Position                    | Are                                             | 
+| --------------------------- |:-----------------------------------------------:| 
+| 1                           | User Name (DBMS) / Instance name (DBM )         | 
+| 2                           | Password (DBMS) / Not used ( DBM )              | 
+| 3                           | DSN ( DBMS ) / TableNAme ( DBM )                | 
 
 # How to run 
 * just run Runner executable with appropriate parameters. 
