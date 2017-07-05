@@ -2,6 +2,7 @@
 
 #include <string>
 #include <sundb.h>
+#include <dbmAPI.h>
 
 // Interface ...
 
@@ -27,6 +28,38 @@ class GPECRunner  : public StandardRunner {
   private : 
      GPECRunner ( const GPECRunner& rhs ) ;
 }; 
+
+
+class DBMRunner : public StandardRunner { 
+ typedef std::string string;
+ public : 
+   DBMRunner ( const string& aUser, const string& aPwd, const string& aDSN ) ; 
+   virtual ~DBMRunner () ;
+   virtual int doInsert ( int aStartIndex, int aEndIndex )  ; 
+   virtual int doUpdate ( int aStartIndex, int aEndIndex )  ; 
+   virtual int doSelect ( int aStartIndex, int aEndIndex )  ; 
+   virtual int doDelete ( int aStartIndex, int aEndIndex )  ; 
+
+  private : 
+     DBMRunner ( const GPECRunner& rhs ) ;
+     dbmHandle mHandle ; 
+
+     #define MAX_CHAR_COL_SIZE 100
+     typedef struct { 
+       int c1 ; 
+       char c2 [ MAX_CHAR_COL_SIZE ] ;
+       char c3 [ MAX_CHAR_COL_SIZE ] ;
+       char c4 [ MAX_CHAR_COL_SIZE ] ;
+       char c5 [ MAX_CHAR_COL_SIZE ] ;
+       char c6 [ MAX_CHAR_COL_SIZE ] ;
+       char c7 [ MAX_CHAR_COL_SIZE ] ;
+       char c8 [ MAX_CHAR_COL_SIZE ] ;
+       int c9 ;
+     } Record; 
+     Record     mRecord; 
+     std::string mTableName ;
+}; 
+
 
 
 class ODBCRunner  : public StandardRunner { 

@@ -22,7 +22,7 @@ int getTimeDiff ( const struct timeval& aStart,
 int printHelpMessage ( char **argv ) { 
 
   printf("%s -t [type] -o [operation_type] -s [start] -e [end] \n", argv[0] ) ;
-  printf("type -> o : odbc  / g : gpec precompiler \n") ;
+  printf("type -> o : odbc  / g : gpec precompiler  / d : dbm \n") ;
   printf("operation_type -> i : insert / s : select / d : delete / u : update\n" ) ;
   return 0 ;
 } 
@@ -49,6 +49,7 @@ int main (int argc, char** argv) {
         sType = optarg [0]  ;
         sCheck ++;
         break; 
+
       case 'o' : 
         sOperation = optarg[0];
         sCheck ++;
@@ -83,8 +84,12 @@ int main (int argc, char** argv) {
      case 'o' : 
        sRunner = new ODBCRunner ( "test", "test", "" ) ;
      break; 
+     case 'd' :
+       sRunner = new DBMRunner  ( "dbm" , "" , "test1" ); 
+     break; 
+
      default : 
-       printf("Invalid Type !!  [o : odbc] / [g : gpec] \n") ;
+       printf("Invalid Type !!  [o : odbc] / [g : gpec] / [d : dbm]  \n") ;
        exit ( -1 ) ;
   } 
 

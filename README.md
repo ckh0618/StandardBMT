@@ -1,2 +1,2 @@
 # StandardBMT
-Standard BMT for SUNDB
+Standard BMT for Goldilocks and Goldilocks DBM 
