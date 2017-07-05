@@ -23,6 +23,11 @@ This program is for
 | 2 | Password (DBMS) / Not used ( DBM ) | 
 | 3 | DSN ( DBMS ) / TableNAme ( DBM ) | 
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
 
 # How to run 
 * just run Runner executable with appropriate parameters. 
