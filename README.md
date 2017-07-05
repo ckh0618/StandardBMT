@@ -16,6 +16,7 @@ This program is for
 
 # How to change dbms/dbm connection information 
 * Just open Runner.cc and modify  constructor parameters . 
+
 || Position || Description || 
 | 1 | User Name (DBMS) / Instance name (DBM ) |
 | 2 | Password (DBMS) / Not used ( DBM ) | 
