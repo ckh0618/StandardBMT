@@ -21,7 +21,7 @@ This program is for
 | --------------------------- |:-----------------------------------------------:| 
 | 1                           | User Name (DBMS) / Instance name (DBM )         | 
 | 2                           | Password (DBMS) / Not used ( DBM )              | 
-| 3                           | DSN ( DBMS ) / TableNAme ( DBM )                | 
+| 3                           | DSN ( DBMS ) / TableName ( DBM )                | 
 
 # How to run 
 * just run Runner executable with appropriate parameters. 
