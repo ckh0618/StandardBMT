@@ -18,6 +18,7 @@ This program is for
 * Just open Runner.cc and modify  constructor parameters . 
 
 | Position | Description | 
+----------- ------------
 | 1 | User Name (DBMS) / Instance name (DBM ) |
 | 2 | Password (DBMS) / Not used ( DBM ) | 
 | 3 | DSN ( DBMS ) / TableNAme ( DBM ) | 
