@@ -85,7 +85,7 @@ int main (int argc, char** argv) {
        sRunner = new ODBCRunner ( "test", "test", "" ) ;
      break; 
      case 'd' :
-       sRunner = new DBMRunner  ( "dbm" , "" , "test1" ); 
+//       sRunner = new DBMRunner  ( "dbm" , "" , "test1" ); 
      break; 
 
      default : 
@@ -122,6 +122,7 @@ int main (int argc, char** argv) {
     gettimeofday (&sEndTime, NULL ) ;
 
     int us = getTimeDiff ( sStartTime, sEndTime ) ;
+
 
     sStore.push_back ( us ) ;
   } 
